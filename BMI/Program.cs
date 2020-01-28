@@ -10,8 +10,16 @@ namespace BMI
     {
         public static void Main()
         {
-            RäknaUt();
-            Console.ReadLine();
+            Console.Write("Vill du räkna ut BMI?");
+            if (Console.ReadLine().ToLower() == "ja")
+            {
+                RäknaUt();
+                Console.ReadLine();
+            } 
+            else
+            {
+                Console.Write("SAD");
+            }
         }
 
         public static void RäknaUt()
@@ -20,10 +28,23 @@ namespace BMI
             double längd = 0;
             int midjemått = 0;
 
+            /**
+             * get weight and check if it is an double
+             * */
             Console.Write("Ange vikt: ");
-            vikt = double.Parse(Console.ReadLine());
+            if (!double.TryParse(Console.ReadLine(), out vikt))
+            {
+                Console.WriteLine("Måste vara ett numeriskt värde");
+                return;
+            }
+
             Console.Write("Ange längd: ");
-            längd = double.Parse(Console.ReadLine());
+            if (!double.TryParse(Console.ReadLine(), out längd))
+            {
+                Console.WriteLine("Måste vara ett numeriskt värde");
+                return;
+            }
+
             Console.Write("Ange midjemått: ");
             midjemått = int.Parse(Console.ReadLine());
 
@@ -51,9 +72,7 @@ namespace BMI
             }
         }
 
-        // Den här metoden kan ge en hint om hur 
-        // uppgift j kan lösas... ;-)
-        public static double ReadDouble(string label)
+        public static double ReadDouble(double label)
         {
             Console.Write(label);
             double d = 0;
